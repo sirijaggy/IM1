@@ -1,0 +1,855 @@
+/* =========================================================
+   HOW ABOUT TENNIS – IM1
+   Desktop-Version (Figma-Frame 1512 px breit)
+   ========================================================= */
+
+/* ---------- Schriften ----------
+   Futura ist auf dem Mac vorinstalliert und wird lokal geladen.
+   Auf Geräten ohne Futura springen Anton und Jost als Ersatz ein. */
+@font-face {
+  font-family: "HAT Futura Cond";
+  src: local("Futura-CondensedExtraBold"), local("Futura Condensed ExtraBold");
+  font-weight: 800;
+}
+@font-face {
+  font-family: "HAT Futura";
+  src: local("Futura-Bold"), local("Futura Bold");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "HAT Futura";
+  src: local("Futura-MediumItalic"), local("Futura Medium Italic");
+  font-weight: 500;
+  font-style: italic;
+}
+
+/* ---------- Farb-Variablen (aus den Figma-Variables) ---------- */
+:root {
+  --font-cond: "HAT Futura Cond", "Anton", "Arial Narrow", sans-serif;
+  --font-futura: "HAT Futura", "Jost", "Futura", sans-serif;
+  --font-text: "Montserrat", Arial, sans-serif;
+
+  --radius: 50px;
+  --shadow-box: drop-shadow(7px 7px 2px rgba(0, 0, 0, 0.35));
+  --pink-fix: #fe4edf;           /* Lieblings-Karten: in beiden Modi gleich */
+}
+
+/* Light Mode */
+[data-theme="light"] {
+  --bg-1: #b0c0ac;               /* colour/background-1 */
+  --bg-2: #344939;               /* colour/background-2 */
+  --primary: #fe4edf;            /* colour/primary */
+  --text-1: #ffffff;             /* colour/text-1 (auf dunklen Flächen) */
+  --text-2: #cfcfcf;             /* colour/text-2 (Navigation, Platzhalter) */
+  --text-3: #000000;             /* colour/text-3 (Fliesstext auf Seite) */
+  --accent-1: #ff03a7;           /* colour/accent-1 */
+  --accent-2: #d6ff00;           /* colour/accent-2 */
+  --field: #ffffff;              /* colour/primary-contrast */
+  --card: rgba(102, 146, 112, 0.3);  /* colour/Funfactcards*/
+  --line: #000000;               /* colour/racket lines */
+  --nav-active: #d6ff00;         /* colour/this page line */
+  --theme-icon: #cbff4d;
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+  --bg-1: #344939;
+  --bg-2: #b0c0ac;
+  --primary: #ffa0ef;
+  --text-1: #000000;
+  --text-2: #000000;
+  --text-3: #ffffff;
+  --accent-1: #ff03a7;
+  --accent-2: #d6ff00;
+  --field: #cfcfcf;
+  --card: rgba(102, 146, 112, 0.3);
+  --line: #ffffff;
+  --nav-active: #ff03a7;
+  --theme-icon: #ff03a7;
+}
+
+/* ---------- Grundlagen ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-1);
+  color: var(--text-3);
+  font-family: var(--font-text);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 27px;
+  transition: background-color 0.5s ease-out, color 0.5s ease-out;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+h1, h2, h3, p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* Der ganze Inhalt ist auf die Figma-Breite von 1512 px ausgelegt - unbedingt ändern */
+.frame {
+  max-width: 1512px;
+  margin: 0 auto;
+  padding-bottom: 16px;
+}
+
+/* ---------- Typografie (Figma Text Styles) ---------- */
+h1 {                                         /* Heading 1 */
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 100px;
+  line-height: 100px;
+  margin-bottom: 21px;
+}
+
+h2, .box-title {                                 /* Heading 2 */
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 60px;
+  line-height: 50px;
+}
+
+.subtitle, .cta-text, .legal-title {                               /* Heading 3 */
+  font-family: var(--font-futura);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 50px;
+}
+
+.cta-text {
+  white-space: nowrap;
+  line-height: 27px;
+}
+
+/* =========================================================
+   01 HEADER
+   ========================================================= */
+.site-header {
+  padding: 26px 30px 0;
+}
+
+.navbar {
+  position: relative;
+  height: 58px;
+  border-radius: var(--radius);
+  background: var(--bg-2);
+  transition: background-color 0.5s ease-out;
+}
+
+.nav-left, .nav-right {
+  position: absolute;
+  display: flex;
+  align-items: center;
+}
+
+.nav-left  { left: 23px; top: 11px; }
+.nav-right { left: 1160px; top: 11px; gap: 18px; }
+
+/* Feste Breiten aus Figma: HOME 88, ABOUT ME 135, CONTACT 120 */
+.nav-home    { width: 88px; }
+.nav-about   { width: 135px; }
+.nav-contact { width: 120px; }
+
+/* Variante «hover»: Schrift wird pink */
+.nav-link:hover {
+  color: var(--primary);
+}
+
+.nav-link {                                  /* Heading 4 */
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 37px;
+  padding: 0 10px;
+  font-family: var(--font-futura);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 27px;
+  color: var(--text-2);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+/* Linie «THIS PAGE» unter der aktuellen Seite.
+   Wie Smart Animate in Figma: Beim Seitenwechsel über die
+   Navigation gleitet sie in 0.5 s (Ease out) zur neuen Seite. */
+.nav-indicator {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--nav-active);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nav-indicator.is-animated {
+  transition:
+    left 0.5s ease-out,
+    top 0.5s ease-out,
+    width 0.5s ease-out,
+    opacity 0.5s ease-out,
+    background-color 0.5s ease-out;
+}
+
+/* FARBMODUS: Icon (aus Figma exportiert) + Text */
+.theme-toggle {
+  justify-content: flex-start;
+  gap: 2px;
+  padding: 0 0 0 17px;
+}
+
+.theme-label {
+  width: 139px;
+  text-align: center;
+}
+
+.theme-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: -2px;
+  color: var(--theme-icon);
+}
+
+.logo {
+  position: absolute;
+  left: 668px;
+  top: 4px;
+  width: 117px;
+  height: 46px;
+  object-fit: contain;
+}
+
+/* =========================================================
+   GEMEINSAME ELEMENTE
+   ========================================================= */
+.hero {
+  padding: 36px 0 0 42px;
+}
+
+.hero-text {
+  width: 1040px;
+  margin-top: 10px;
+}
+
+/* Grosse Info-Box (Funfacts, Mein Racket) */
+.box {
+  position: relative;
+  width: 1410px;
+  margin-left: 50px;
+  border-radius: var(--radius);
+  background: var(--bg-2);
+  color: var(--text-1);
+  filter: var(--shadow-box);
+  transition: background-color 0.5s ease-out, color 0.5s ease-out;
+}
+
+.box-title {
+  color: var(--accent-2);
+}
+
+.funfacts .box-title {
+  width: 509px;
+  margin-left: -95px;
+  text-align: center;
+}
+
+/* Pinke Pill-Buttons (ABOUT ME, CONTACT ME) */
+.btn-pill, .btn-send {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 259px;
+  height: 73px;
+  border-radius: var(--radius);
+  background: var(--primary);
+  color: var(--text-1);
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 27px;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Komponente «Button»: Default → hover (Lime) → onclick (Weiss) */
+.btn-pill:hover, .btn-send:hover {
+  background: var(--accent-2);
+  color: #000;
+}
+
+.btn-pill:active, .btn-send:active {
+  background: #ffffff;
+  color: #000;
+}
+
+.cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.photo {
+  overflow: hidden;
+  border-radius: var(--radius);
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =========================================================
+   HOME
+   ========================================================= */
+.page-home .hero {
+  height: 356px;                 /* Schläger-Bereich startet bei y = 440 */
+}
+
+.racket-stage {
+  position: relative;
+  height: 1897px;
+}
+
+.racket-lines {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1512px;
+  height: 1760px;
+  pointer-events: none;
+}
+
+.racket-lines line {
+  stroke: var(--line);
+  stroke-width: 3;
+  transition: stroke 0.3s ease;
+}
+
+.racket-pictures {
+  position: absolute;
+  left: 502px;
+  top: 179px;
+  width: 509px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.racket-img {
+  width: 509px;
+  aspect-ratio: 636 / 1580;
+  object-fit: contain;
+}
+
+
+.balls {
+  position: relative;
+  width: 330px;
+  height: 307px;
+  object-fit: cover;
+}
+
+
+.point {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ff47df;
+  border: 1px solid #000;
+  z-index: 2;
+}
+
+/* Die sechs Teile-Buttons
+   Wie im Figma-Prototyp: Klick → der Button verwandelt sich in die
+   Infobox (Smart Animate, 0.5 s, Ease out). Klick auf die Box → zurück. */
+.part {
+  position: absolute;
+  z-index: 3;
+}
+
+.part.is-open {
+  z-index: 5;
+}
+
+.part-btn {
+  position: relative;
+  display: block;
+  width: 344px;
+  height: 167px;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--primary);
+  color: #000;
+  text-align: left;
+  transition:
+    width 0.5s ease-out,
+    height 0.5s ease-out,
+    background-color 0.2s ease;
+}
+
+/* Variante «HOVER»: Lime (nur im geschlossenen Zustand) */
+.part:not(.is-open) .part-btn:hover {
+  background: var(--accent-2);
+}
+
+/* Variante «… TEXT»: Infobox */
+.part.is-open .part-btn {
+  width: var(--open-w);
+  height: var(--open-h);
+}
+
+/* Geschlossener Inhalt: Nummer, Name, Plus */
+.part-closed {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 344px;
+  height: 167px;
+  display: grid;
+  grid-template-columns: 220px 40px;
+  column-gap: 10px;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.25s ease-out;
+}
+
+.part-num {
+  grid-column: 1;
+  font-family: var(--font-futura);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 27px;
+  margin-bottom: 23px;
+}
+
+.part-name {
+  grid-column: 1;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 60px;
+  line-height: 50px;
+}
+
+.plus {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #000;
+}
+
+.plus::before,
+.plus::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 18px;
+  height: 2px;
+  background: #fff;
+  border-radius: 1px;
+  transform: translate(-50%, -50%);
+}
+
+.plus::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+/* Offener Inhalt: Titel + Text */
+.part-info {
+  position: absolute;
+  left: 29px;
+  top: 0;
+  width: calc(var(--open-w) - 58px);
+  height: var(--open-h);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: var(--text-1);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease-out;
+}
+
+.part-title {
+  display: block;
+  font-family: var(--font-futura);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 27px;
+}
+
+.part-text {
+  display: block;
+  font-family: var(--font-text);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 27px;
+}
+
+.part.is-open .part-closed {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.part.is-open .part-info {
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+
+/* Funfacts */
+.funfacts {
+  height: 579px;
+  padding: 43px 22px 0 21px;
+}
+
+.funfact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 433px);
+  gap: 34px;
+  margin-top: 56px;
+}
+
+.funfact {
+  height: 371px;
+  padding: 37px 31px 0;
+  border-radius: var(--radius);
+  background: var(--card);
+}
+
+.funfact-num {
+  display: block;
+  padding-left: 14px;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 60px;
+  line-height: 50px;
+  color: var(--accent-2);
+  margin-bottom: 37px;
+}
+
+.funfact h3 {
+  font-family: var(--font-text);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 27px;
+}
+
+.funfact p {
+  width: 350px;
+}
+
+/* Call to Action unten */
+.cta-row {
+  display: grid;
+  grid-template-columns: 440px 440px;
+  column-gap: 280px;
+  padding-left: 200px;
+  margin-top: 219px;
+  padding-bottom: 155px;
+}
+
+/* =========================================================
+   ABOUT ME
+   ========================================================= */
+.page-about .hero {
+  height: 220px;
+}
+
+.intro {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  padding-left: 51px;
+}
+
+.photo-1 {
+  width: 696px;
+  height: 790px;
+  flex-shrink: 0;
+}
+
+.intro-text {
+  width: 566px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 167px;
+}
+
+.intro-text p:first-of-type {
+  min-height: 87px;
+}
+
+.intro-text .highlight {
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 27px;
+  color: var(--accent-1);
+}
+
+.my-racket {
+  width: 1409px;
+  margin-left: 52px;
+  margin-top: 69px;
+  height: 384px;
+  padding: 37px 0 0 40px;
+}
+
+.box-text {
+  width: 1296px;
+  margin: 40px 0 0 -5px;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 350px);
+  gap: 140px;
+  margin-top: 15px;
+}
+
+.stat {
+  height: 170px;
+  border-radius: var(--radius);
+  background: var(--card);
+  padding: 0 20px 0 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.stat-label {
+  display: block;
+  font-size: 20px;
+  line-height: 27px;
+  margin-bottom: 27px;
+}
+
+.stat-value {
+  display: block;
+  font-family: var(--font-cond);
+  font-weight: 800;
+  font-size: 60px;
+  line-height: 50px;
+}
+
+.court {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 72px;
+  padding: 0 52px 0 52px;
+}
+
+.court-text {
+  width: 586px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.photo-2 {
+  width: 618px;
+  height: 562px;
+}
+
+.fav-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 404px);
+  gap: 85px;
+  margin: 109px 0 0 65px;
+}
+
+.fav {
+  height: 172px;
+  border-radius: var(--radius);
+  background: var(--pink-fix);
+  color: #000;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 35px 20px 0 28px;
+}
+
+.cta-center {
+  margin-top: 109px;
+  padding-bottom: 209px;
+  gap: 16px;
+}
+
+.cta-center .cta-text {
+  line-height: 53px;
+}
+
+/* =========================================================
+   CONTACT
+   ========================================================= */
+.page-contact .hero {
+  height: 220px;
+  padding-top: 35px;
+}
+
+.page-contact .subtitle {
+  line-height: 27px;
+  margin-top: 38px;
+}
+
+.contact-layout {
+  display: flex;
+  gap: 39px;
+  padding: 0 52px 436px 50px;
+}
+
+.contact-photo {
+  width: 299px;
+  height: 652px;
+  border-radius: var(--radius);
+  opacity: 0.8;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.contact-form {
+  width: 1072px;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 40px;
+  row-gap: 0;
+}
+
+.field.field-type { margin-top: 17px; gap: 5px; }
+.field.field-msg  { margin-top: 16px; gap: 4px; }
+
+.field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field-half {
+  width: 516px;
+}
+
+.field input, .field textarea {
+  width: 100%;
+  height: 77px;
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+  background: var(--field);
+  color: var(--text-3);
+  padding: 0 34px;
+  font-family: var(--font-text);
+  font-weight: 500;
+  font-size: 20px;
+  outline: none;
+  transition: border-color 0.2s ease, background-color 0.3s ease;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--text-2);
+  opacity: 1;
+}
+
+/* Komponente «BAR / FIELD CONTACT»: Default → CLICK (pinker Rahmen) */
+.field input:focus,
+.field textarea:focus {
+  border-color: var(--accent-1);
+}
+
+.field textarea {
+  height: 367px;
+  padding-top: 26px;
+  resize: none;
+  line-height: 27px;
+}
+
+.btn-send {
+  margin-top: 29px;
+  margin-left: auto;
+  color: var(--text-1);
+}
+
+/* =========================================================
+   IMPRESSUM
+   ========================================================= */
+.page-impressum .hero {
+  height: 178px;
+  padding-top: 34px;
+}
+
+.legal {
+  width: 857px;
+  min-height: 1111px;
+  margin-left: 52px;
+}
+
+.legal-title {
+  line-height: 27px;
+  margin-bottom: 27px;
+}
+
+.legal p + p {
+  margin-top: 27px;
+}
+
+.legal strong {
+  font-weight: 700;
+}
+
+/* =========================================================
+   03 FOOTER
+   ========================================================= */
+.site-footer {
+  margin: 0 40px;
+  height: 58px;
+  padding: 22px 46px 0 29px;
+  border-top: 3px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  transition: border-color 0.5s ease-out;
+}
+
+.site-footer a {
+  text-decoration: none;
+}
+
