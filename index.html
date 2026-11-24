@@ -1,10 +1,220 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How About Tennis?</title>
+
+  <!-- Montserrat + Ersatzschriften, falls Futura nicht installiert ist -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Jost:ital,wght@0,700;1,500&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Gewählten Farbmodus sofort setzen -->
+  <script>
+    try { if (localStorage.getItem('hat-theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (e) {}
+  </script>
 </head>
 <body>
+<div class="frame">
 
+  <!-- ===================== 01 HEADER ===================== -->
+  <header class="site-header">
+    <nav class="navbar">
+      <div class="nav-left">
+        <span class="nav-link nav-home is-active" aria-current="page">HOME</span>
+        <button type="button" class="nav-link theme-toggle" id="themeToggle">
+          <svg class="theme-icon" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M15.75 9C15.75 12.7279 12.7279 15.75 9 15.75C5.27208 15.75 2.25 12.7279 2.25 9C2.25 5.27208 5.27208 2.25 9 2.25C12.7279 2.25 15.75 5.27208 15.75 9Z" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M9 2.25C7.20979 2.25 5.4929 2.96116 4.22703 4.22703C2.96116 5.4929 2.25 7.20979 2.25 9C2.25 10.7902 2.96116 12.5071 4.22703 13.773C5.4929 15.0388 7.20979 15.75 9 15.75V2.25Z" fill="currentColor" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+          <span class="theme-label">FARBMODUS</span>
+        </button>
+      </div>
+
+      <img class="logo" src="assets/logo.png" alt="Tennis" width="117" height="46">
+
+      <div class="nav-right">
+        <a href="about.html" class="nav-link nav-about">ABOUT ME</a>
+        <a href="contact.html" class="nav-link nav-contact">CONTACT</a>
+      </div>
+
+      <!-- Linie «THIS PAGE» unter der aktuellen Seite -->
+      <span class="nav-indicator" aria-hidden="true"></span>
+    </nav>
+  </header>
+
+  <!-- ===================== 02 MAIN ===================== -->
+  <main>
+  <section class="page-home">
+    <div class="hero">
+      <h1>HOW ABOUT TENNIS?</h1>
+      <p class="subtitle">Das Racket einfach erklärt.</p>
+      <p class="hero-text">Ein Tennisschläger besteht aus mehr als Rahmen und Saiten. Klick dich durch die sechs Teile und finde heraus, was sie für dein Spiel bedeuten.</p>
+    </div>
+
+    <!-- Schläger mit sechs Hotspots -->
+    <div class="racket-stage">
+      <svg class="racket-lines" viewBox="0 0 1512 1760" aria-hidden="true">
+        <line x1="375" y1="98"   x2="653" y2="218" />  <!-- Frame   -->
+        <line x1="750" y1="288"  x2="988" y2="161" />  <!-- Strings -->
+        <line x1="383" y1="809"  x2="680" y2="890" />  <!-- Throat  -->
+        <line x1="822" y1="831"  x2="964" y2="925" />  <!-- Sizing  -->
+        <line x1="480" y1="1274" x2="739" y2="1363" /> <!-- Handle  -->
+        <line x1="749" y1="1544" x2="917" y2="1425" /> <!-- Balls   -->
+      </svg>
+
+      <div class="racket-pictures">
+        <div class="racket-img">
+          <img src="assets/racket.png" alt="Pinker Tennisschläger">
+        </div>
+        <div class="balls">
+          <img src="assets/tennisball.png" alt="Tennisbälle" style="left:44px;  top:142px;">
+        </div>
+      </div>
+
+      <!-- Punkte am Schläger -->
+      <span class="point" style="left:646px; top:208px;"></span>
+      <span class="point" style="left:743px; top:281px;"></span>
+      <span class="point" style="left:673px; top:880px;"></span>
+      <span class="point" style="left:815px; top:824px;"></span>
+      <span class="point" style="left:732px; top:1356px;"></span>
+      <span class="point" style="left:742px; top:1537px;"></span>
+
+      <!-- Buttons: Klick verwandelt den Button in die Infobox -->
+      <div class="part" style="left:97px;  top:23px; --open-w:518px; --open-h:308px;">
+        <button type="button" class="part-btn">
+          <span class="part-closed">
+            <span class="part-num">01</span>
+            <span class="part-name">FRAME</span>
+            <span class="plus" aria-hidden="true"></span>
+          </span>
+          <span class="part-info">
+            <span class="part-title">FRAME</span>
+            <span class="part-text">Der Rahmen ist das tragende Gerüst eines Tennisschlägers und bestimmt Kontrolle, Power und das Schlaggefühl.</span>
+            <span class="part-text">Er besteht aus zwei Teilen: Der Kopf hält die Bespannung und das Herz ist der Übergang zum Griff. Wichtig ist dabei die Rahmenstärke: Dicke Rahmen erzeugen mehr Power, dünne Rahmen bieten mehr Ballgefühl.</span>
+          </span>
+        </button>
+      </div>
+
+      <div class="part" style="left:972px; top:78px; --open-w:518px; --open-h:265px;">
+        <button type="button" class="part-btn">
+          <span class="part-closed">
+            <span class="part-num">02</span>
+            <span class="part-name">STRINGS</span>
+            <span class="plus" aria-hidden="true"></span>
+          </span>
+          <span class="part-info">
+            <span class="part-title">STRINGS</span>
+            <span class="part-text">Die Hauptsaiten verlaufen vertikal und die Quersaiten horizontal. Zusammen bilden sie die Schlagfläche, mit der du den Ball triffst. Die Spannung, die du für deine Saiten wählst, beeinflusst dein Spiel: Eine tiefe Bespannungshärte erhöht die Power, eine höhere unterstützt die Kontrolle.</span>
+          </span>
+        </button>
+      </div>
+
+      <div class="part" style="left:76px;  top:726px; --open-w:518px; --open-h:285px;">
+        <button type="button" class="part-btn">
+          <span class="part-closed">
+            <span class="part-num">03</span>
+            <span class="part-name">THROAT</span>
+            <span class="plus" aria-hidden="true"></span>
+          </span>
+          <span class="part-info">
+            <span class="part-title">THROAT</span>
+            <span class="part-text">Unter dem Kopf des Schlägers befindet sich das Herzstück. Ein offenes Herz macht den Schläger aerodynamischer, wenn du ihn zum Ball schwingst. Das ermöglicht dir, schneller zu schwingen und mehr Power sowie Geschwindigkeit bei deinen Schlägen zu erzeugen. Der Teil des Schlägers am oberen Ende des Halses ist das Joch.</span>
+          </span>
+        </button>
+      </div>
+
+      <div class="part" style="left:958px; top:838px; --open-w:518px; --open-h:284px;">
+        <button type="button" class="part-btn">
+          <span class="part-closed">
+            <span class="part-num">04</span>
+            <span class="part-name">SIZING</span>
+            <span class="plus" aria-hidden="true"></span>
+          </span>
+          <span class="part-info">
+            <span class="part-title">SIZING</span>
+            <span class="part-text">Ein schwererer Schläger gibt dir mehr Power und Stabilität, ein leichterer Schläger ist manövrierfähiger. Die Kopfgrösse hat einen grossen Einfluss auf die Power und Kontrolle des Schlägers. Eine Vergrösserung des Schlägerkopfes sorgt für mehr Power, ein kleinerer Kopf eine geringere Power und mehr Kontrolle.</span>
+          </span>
+        </button>
+      </div>
+
+      <div class="part" style="left:145px; top:1186px; --open-w:518px; --open-h:284px;">
+        <button type="button" class="part-btn">
+          <span class="part-closed">
+            <span class="part-num">05</span>
+            <span class="part-name">HANDLE</span>
+            <span class="plus" aria-hidden="true"></span>
+          </span>
+          <span class="part-info">
+            <span class="part-title">HANDLE</span>
+            <span class="part-text">Das ist der Teil des Schlägers, den du festhältst. Er ist in verschiedenen Grössen erhältlich – achte darauf, dass er weder zu klein noch zu gross ist, da dies das Spielen angenehmer macht. Darum ist das Griffband gewickelt, welches für mehr Komfort sorgt, Schweiss absorbiert und dir die volle Kontrolle über den Schläger ermöglicht.</span>
+          </span>
+        </button>
+      </div>
+
+      <div class="part" style="left:861px; top:1370px; --open-w:535px; --open-h:284px;">
+        <button type="button" class="part-btn">
+          <span class="part-closed">
+            <span class="part-num">06</span>
+            <span class="part-name">BALLS</span>
+            <span class="plus" aria-hidden="true"></span>
+          </span>
+          <span class="part-info">
+            <span class="part-title">BALLS</span>
+            <span class="part-text">Besteht aus einem hohlen Gummikern, der unter Druck steht und mit einem filzähnlichen Gewebe überzogen ist:</span>
+            <span class="part-text">Druckbälle haben einen Innendruck für hohe Power und optimales Springverhalten. Drucklose Bälle bestehen aus dickerem Gummi ohne Innendruck. Sie springen durch die Beschaffenheit des Gummis ab.</span>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Funfacts -->
+    <section class="box funfacts">
+      <h2 class="box-title">FUNFACTS</h2>
+      <div class="funfact-grid">
+        <article class="funfact">
+          <span class="funfact-num">1</span>
+          <h3>Anfangs mit blosser Hand</h3>
+          <p>Bevor es Schläger gab, schlugen die Spieler den Ball mit der Hand. Das tat weh: Es folgten Handschuhe, dann Holzschläger mit Saiten und heute Carbon.</p>
+        </article>
+        <article class="funfact">
+          <span class="funfact-num">2</span>
+          <h3>Jahrzehnte aus Holz</h3>
+          <p>Holzschläger waren schwer und wenig kraftvoll. Erst Metall und Graphit machten schnellere, aggressivere Schläge möglich.</p>
+        </article>
+        <article class="funfact">
+          <span class="funfact-num">3</span>
+          <h3>Gelb statt Weiss</h3>
+          <p>Bis in die 1970er waren Tennisbälle weiss. Gelbe Bälle sind im Fernsehen und bei schlechtem Licht besser zu sehen und blieben deshalb.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <div class="cta-row">
+      <div class="cta">
+        <p class="cta-text">ETWAS ÜBER MICH.</p>
+        <a href="about.html" class="btn-pill">ABOUT ME</a>
+      </div>
+      <div class="cta">
+        <p class="cta-text">HAST DU EINE FRAGE?</p>
+        <a href="contact.html" class="btn-pill">CONTACT ME</a>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <!-- ===================== 03 FOOTER ===================== -->
+  <footer class="site-footer">
+    <p>© 2026 HOW ABOUT TENNIS&nbsp;&nbsp;- IM1</p>
+    <a href="impressum.html">Impressum AGB</a>
+  </footer>
+
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
