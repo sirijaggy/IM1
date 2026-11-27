@@ -1,77 +1,77 @@
-/* =========================================================
-   HOW ABOUT TENNIS – JavaScript
-   1. FARBMODUS: Wechsel zwischen hell und dunkel
-   2. Linie in der Navigation: gleitet zur neuen Seite
-   3. Schläger-Buttons: Button ↔ Infobox
-   ========================================================= */
+// =========================================================
+// HOW ABOUT TENNIS – JavaScript
+// 1. Farbmodus (hell / dunkel)
+// 2. Mobile-Menü
+// 3. Infoboxen auf der Startseite
+// 3. Nummern auf dem Schläger, scroll to Infobox and open
+// =========================================================
 
-/* 1. FARBMODUS
-   Der Modus wird gespeichert, damit er beim Seitenwechsel bleibt. */
-document.getElementById('themeToggle').addEventListener('click', () => {
-  const root = document.documentElement;
-  const theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
-  root.dataset.theme = theme;
-  try { localStorage.setItem('hat-theme', theme); } catch (e) {}
-});
+// ---------- 1. Farbmodus ----------
 
-/* 2. Linie «THIS PAGE»
-   Beim Klick auf einen Link in der Navigation merkt sich die Seite,
-   wo die Linie gerade ist. Die neue Seite startet die Linie dort
-   und lässt sie zur aktuellen Seite gleiten (wie Smart Animate).
-   Auf dem Impressum gibt es keine Linie: Sie blendet aus bzw. ein. */
-const navbar = document.querySelector('.navbar');
-const line = document.querySelector('.nav-indicator');
-const current = navbar.querySelector('.nav-link.is-active');
-
-// Position der Linie unter einem Menüpunkt (wie in Figma: 10 px Innenabstand)
-function linePosition(link) {
-  const bar = navbar.getBoundingClientRect();
-  const box = link.getBoundingClientRect();
-  return { left: box.left - bar.left + 10, top: box.bottom - bar.top - 9, width: box.width - 20 };
+// Beim Laden: Wurde der Dark Mode gespeichert? Dann einschalten.
+if (localStorage.getItem("theme") === "dark") {
+  document.body.classList.add("dark");
 }
 
-function setLine(pos, visible) {
-  if (pos) {
-    line.style.left = pos.left + 'px';
-    line.style.top = pos.top + 'px';
-    line.style.width = pos.width + 'px';
+// Wechselt zwischen hell und dunkel und merkt sich die Wahl
+function toggleTheme() {
+  document.body.classList.toggle("dark");
+
+  if (document.body.classList.contains("dark")) {
+    localStorage.setItem("theme", "dark");
+  } else {
+    localStorage.setItem("theme", "light");
   }
-  line.style.opacity = visible ? 1 : 0;
 }
 
-document.fonts.ready.then(() => {
-  const target = current ? linePosition(current) : null;
-  let saved = null;
-  try {
-    saved = sessionStorage.getItem('hat-line');
-    sessionStorage.removeItem('hat-line');
-  } catch (e) {}
+// Alle Farbmodus-Buttons (Desktop, Mobile-Icon, Mobile-Menü)
+const themeButtons = document.querySelectorAll(".theme-button");
 
-  if (saved === null) {
-    // Seite ohne Navigation geöffnet: Linie sofort an ihrem Platz
-    setLine(target, Boolean(target));
-    return;
-  }
-
-  // Über die Navigation gekommen: von der alten Position aus animieren
-  const start = JSON.parse(saved);
-  setLine(start || target, Boolean(start));
-  void line.offsetWidth; // Startposition anwenden, bevor die Animation beginnt
-  line.classList.add('is-animated');
-  setLine(target || start, Boolean(target));
+themeButtons.forEach(function (button) {
+  button.addEventListener("click", toggleTheme);
 });
 
-navbar.querySelectorAll('a.nav-link').forEach((link) => {
-  link.addEventListener('click', () => {
-    const pos = current ? linePosition(current) : null;
-    try { sessionStorage.setItem('hat-line', JSON.stringify(pos)); } catch (e) {}
+
+// ---------- 2. Mobile-Menü ----------
+
+const header = document.querySelector(".header");
+const menuButton = document.querySelector(".menu-button");
+
+menuButton.addEventListener("click", function () {
+  header.classList.toggle("open");
+});
+
+
+// ---------- 3. Infoboxen ----------
+// Klick auf eine Infobox öffnet sie, nochmals klicken schliesst sie.
+
+const infoboxes = document.querySelectorAll(".infobox");
+
+infoboxes.forEach(function (infobox) {
+  infobox.addEventListener("click", function () {
+    infobox.classList.toggle("open");
   });
 });
 
-/* 3. Schläger-Buttons (nur auf der Startseite)
-   Klick auf den Button → Infobox. Klick auf die Infobox → Button. */
-document.querySelectorAll('.part-btn').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    btn.parentElement.classList.toggle('is-open');
+
+// Alle Nummern auf dem Schläger
+const numbers = document.querySelectorAll(".number");
+
+numbers.forEach(function (number) {
+  number.addEventListener("click", function (event) {
+    // Den normalen Sprung des Links verhindern
+    event.preventDefault();
+
+    // Die passende Infobox suchen (z. B. href="#frame" → id="frame")
+    const box = document.querySelector(number.getAttribute("href"));
+
+    // Infobox öffnen
+    box.classList.add("open");
+
+    // Warten, bis die Box fertig aufgegangen ist (0.3 s wie im CSS),
+    // dann weich in die Mitte des Bildschirms scrollen
+    setTimeout(function () {
+      box.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 300);
   });
 });
